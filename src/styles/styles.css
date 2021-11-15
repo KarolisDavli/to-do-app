@@ -1,0 +1,76 @@
+/* Simple reset */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Styles */
+h1 {
+  text-align: center;
+}
+
+#grid {
+  border-radius: .5rem;
+  background-color: gainsboro;
+  display: grid;
+  grid: 10% 90% / 35% 65%;
+  width: 900px;
+  height: 700px;
+  margin: auto;
+}
+
+.grid-item {
+  border: 5px grey solid;
+  border-radius: .5rem;
+  position: relative;
+}
+
+.grid-inner-item {
+  padding: 2rem;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-align: center;
+  width: 100%;
+}
+
+
+li {
+  list-style-type: none;
+}
