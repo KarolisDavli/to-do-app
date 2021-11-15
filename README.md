@@ -15,8 +15,3 @@
 > CSS  
 > Javascript  
 > Webpack
-# to-do-app
-# to-do-app
-# to-do-app
-# to-do-app
-# to-do-app
