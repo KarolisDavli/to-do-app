@@ -1,11 +1,11 @@
 import { projectListArr } from "./addProject";
 
-const browseP = () => {
+const browseP = (e) => {
 
   console.log(projectListArr);
 
-  const ineex = [...el.projectListArr.children].indexOf(el);
-  console.log(ineex);
+  const index = projectListArr.indexOf(e);
+  console.log(index);
 
 }
 

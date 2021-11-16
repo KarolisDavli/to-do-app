@@ -23,8 +23,10 @@ const addProject = () => {
       projectListItem.value = '';
 
 
-      // Switch between project tabs
-      divItemas.addEventListener('click', browseP);
+      // Switch between project tabs function
+      divItemas.addEventListener('click', () => {
+        browseP(divItemas);
+      });
     
 
       createRemoveBtn(divItemas);
@@ -47,4 +49,5 @@ const createRemoveBtn = (el) => {
 export {
   addProject,
   projectListArr
+  
 }
