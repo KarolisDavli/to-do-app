@@ -16,6 +16,9 @@ const addTodo = () => {
     // Add item to project list
     todoList.innerHTML += '<li>' + todoListItem.value + '</li>';
 
+    console.log(todoListItem.value);
+    console.log(todoList);
+
     // Clear input
     todoListItem.value = '';
   }, false)
