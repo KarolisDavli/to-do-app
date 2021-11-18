@@ -3,7 +3,7 @@ import browseP from "./browseP"
 
 const addToProjectList = document.querySelector('#add-to-project-list');
 const projectListItem = document.querySelector('#project-list-item');
-const projectList = document.querySelector('.project-list');
+const projectList = document.querySelector('.projects-nav');
 
 
 const projectListArr = [];
@@ -14,24 +14,26 @@ const addProject = () => {
       e.preventDefault();
       if(projectListItem.value.length < 1) return;
 
-      const divItemas = document.createElement('div');
-      projectListArr.push(divItemas);
-      divItemas.classList.add(`project-item-${projectListArr.indexOf(divItemas)}`);
-      divItemas.innerHTML = projectListItem.value;
 
+      const navTabs = document.querySelectorAll('.nav-tabs');
+      const projectItem = document.createElement('li');
+      projectListArr.push(projectItem);
+      const hrefas = `project-item-${projectListArr.indexOf(projectItem)}`;
+      projectItem.href = "hrefas";
+      projectItem.innerHTML = `<a href=${hrefas}>${projectListItem.value}</a>`;
+      projectList.append(projectItem);
       
-      projectList.append(divItemas);
+      console.log(hrefas);
+      console.log(projectItem);
+
+    
       projectListItem.value = '';
 
 
-      // Switch between project tabs function
-      // divItemas.addEventListener('click', () => {
-      //   browseP(divItemas);
-      // });
     
 
-      createRemoveBtn(divItemas);
-      createNewTab(divItemas);
+      createRemoveBtn(projectItem);
+      // createNewTab(projectItem);
     }, false)
 }
 
@@ -47,19 +49,17 @@ const createRemoveBtn = (el) => {
         el.append(removeBtn);
 }
 
-const createNewTab = (e) => {
-  const todoPlaceHolder = document.querySelector('.todo');
+// const createNewTab = (e) => {
+//   const todoPlaceHolder = document.querySelector('.todo');
 
-  const todoList = document.querySelector('.todo-list')
+//   const toDoTab = document.createElement('ul');
+//   toDoTab.classList.add(`list-${projectListArr.indexOf(e)}`);
 
-  const toDoTab = document.createElement('ul');
-  toDoTab.classList.add(`list-${projectListArr.indexOf(e)}`);
+//   todoPlaceHolder.replaceChild(toDoTab, todoPlaceHolder.firstElementChild);
+//   console.log(toDoTab);
 
-  todoPlaceHolder.replaceChild(toDoTab, todoPlaceHolder.firstElementChild);
-  console.log(toDoTab);
-
-  addTodo(projectListArr.indexOf(e));
-}
+//   addTodo(projectListArr.indexOf(e));
+// }
 
 
 export {

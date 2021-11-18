@@ -6,8 +6,7 @@ const addTodo = (i) => {
   const todoListItem = document.querySelector('#todo-list-item');
   const todoList = document.querySelector(`.list-${i}`);
 
-  console.log(i);
-  console.log(todoList);
+
 
   addToTodoList.addEventListener('submit', function (e) {
     // Don't submit the form
