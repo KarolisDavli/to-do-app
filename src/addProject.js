@@ -1,3 +1,4 @@
+import addTodo from "./addTodo";
 import browseP from "./browseP"
 
 const addToProjectList = document.querySelector('#add-to-project-list');
@@ -24,12 +25,13 @@ const addProject = () => {
 
 
       // Switch between project tabs function
-      divItemas.addEventListener('click', () => {
-        browseP(divItemas);
-      });
+      // divItemas.addEventListener('click', () => {
+      //   browseP(divItemas);
+      // });
     
 
       createRemoveBtn(divItemas);
+      createNewTab(divItemas);
     }, false)
 }
 
@@ -43,6 +45,20 @@ const createRemoveBtn = (el) => {
           projectList.removeChild(el)
         })
         el.append(removeBtn);
+}
+
+const createNewTab = (e) => {
+  const todoPlaceHolder = document.querySelector('.todo');
+
+  const todoList = document.querySelector('.todo-list')
+
+  const toDoTab = document.createElement('ul');
+  toDoTab.classList.add(`list-${projectListArr.indexOf(e)}`);
+
+  todoPlaceHolder.replaceChild(toDoTab, todoPlaceHolder.firstElementChild);
+  console.log(toDoTab);
+
+  addTodo(projectListArr.indexOf(e));
 }
 
 
