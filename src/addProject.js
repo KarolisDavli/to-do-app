@@ -19,12 +19,18 @@ const addProject = () => {
       const projectItem = document.createElement('li');
       projectListArr.push(projectItem);
       const hrefas = `project-item-${projectListArr.indexOf(projectItem)}`;
+      // new project UI
       projectItem.href = "hrefas";
       projectItem.innerHTML = `<a href=${hrefas}>${projectListItem.value}</a>`;
       projectList.append(projectItem);
+      // new project items UI
+      const todoList = document.createElement('section');
+      todoList.innerHTML = `${projectListItem.value} list`;
+      todoList.setAttribute('href', hrefas);
+      todoList.className = 'project-content hide';
       
-      console.log(hrefas);
-      console.log(projectItem);
+      console.log(todoList);
+     
 
     
       projectListItem.value = '';
@@ -33,6 +39,7 @@ const addProject = () => {
     
 
       createRemoveBtn(projectItem);
+      navigate(hrefas);
       // createNewTab(projectItem);
     }, false)
 }
@@ -49,17 +56,26 @@ const createRemoveBtn = (el) => {
         el.append(removeBtn);
 }
 
-// const createNewTab = (e) => {
-//   const todoPlaceHolder = document.querySelector('.todo');
+// Navigate through projects
+const navigate = (href) => {
+  const anchor = Array.from(document.querySelectorAll('a'));
+  anchor.forEach(i => {
+    i.addEventListener('click', () => {
+      let activeProjectSelector = href;
+      console.log(activeProjectSelector);
+      
+      // Find active project and remove class
+      let activeProject = document.querySelectorAll('nav-tabs li.active');
 
-//   const toDoTab = document.createElement('ul');
-//   toDoTab.classList.add(`list-${projectListArr.indexOf(e)}`);
+      // href link to separate page instead of tab
+      console.log(activeProject);
+    })
 
-//   todoPlaceHolder.replaceChild(toDoTab, todoPlaceHolder.firstElementChild);
-//   console.log(toDoTab);
 
-//   addTodo(projectListArr.indexOf(e));
-// }
+  })
+  console.log(anchor);
+  // console.log(href);
+}
 
 
 export {
