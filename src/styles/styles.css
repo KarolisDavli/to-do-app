@@ -74,3 +74,13 @@ h1 {
 li {
   list-style-type: none;
 }
+
+
+/* Hide/show project tabs */
+.active {
+  display: block;
+}
+
+.hide {
+  display: none;
+}

@@ -23,23 +23,22 @@ const addProject = () => {
       projectItem.href = "hrefas";
       projectItem.innerHTML = `<a href=${hrefas}>${projectListItem.value}</a>`;
       projectList.append(projectItem);
-      // new project items UI
-      const todoList = document.createElement('section');
-      todoList.innerHTML = `${projectListItem.value} list`;
-      todoList.setAttribute('href', hrefas);
-      todoList.className = 'project-content hide';
-      
-      console.log(todoList);
-     
 
-    
+      // new project items UI
+
+      const newTodoList = document.createElement('ul');
+      newTodoList.innerHTML = `${projectListItem.value} list`;
+      newTodoList.setAttribute('href', hrefas);
+      newTodoList.className = 'todo-list project-content active';
+     
+      
       projectListItem.value = '';
 
 
     
 
       createRemoveBtn(projectItem);
-      navigate(hrefas);
+      navigate(hrefas, newTodoList);
       // createNewTab(projectItem);
     }, false)
 }
@@ -57,24 +56,32 @@ const createRemoveBtn = (el) => {
 }
 
 // Navigate through projects
-const navigate = (href) => {
+const navigate = (href, newTodoList) => {
   const anchor = Array.from(document.querySelectorAll('a'));
   anchor.forEach(i => {
-    i.addEventListener('click', () => {
-      let activeProjectSelector = href;
-      console.log(activeProjectSelector);
-      
-      // Find active project and remove class
-      let activeProject = document.querySelectorAll('nav-tabs li.active');
+    i.addEventListener('click', (e) => {
+      e.preventDefault()
+      console.log(e);
 
-      // href link to separate page instead of tab
-      console.log(activeProject);
+      // Project todo list UI
+
+      const todoList = document.querySelector('.todo');
+      todoList.append(newTodoList);
+
+
+      // Find active and hide it
+      const activeNow = Array.from(document.querySelectorAll('.active'));
+
+      console.log(activeNow);
+      activeNow.forEach(i => {
+        i.classList.remove('active');
+        i.classList.add('hide');
+      })
+
+      newTodoList.classList.add('active');
+
     })
-
-
   })
-  console.log(anchor);
-  // console.log(href);
 }
 
 

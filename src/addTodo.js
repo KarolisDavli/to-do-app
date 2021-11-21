@@ -1,10 +1,10 @@
 
 
-const addTodo = (i) => {
+const addTodo = () => {
   // Listen for new project
   const addToTodoList = document.getElementById('add-to-todo-list');
   const todoListItem = document.querySelector('#todo-list-item');
-  const todoList = document.querySelector(`.list-${i}`);
+  const todoList = document.querySelector(`.todo-list`);
 
 
 
