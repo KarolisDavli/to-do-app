@@ -19,17 +19,13 @@ const addProject = () => {
       const projectItem = document.createElement('li');
       projectListArr.push(projectItem);
       const hrefas = `project-item-${projectListArr.indexOf(projectItem)}`;
+
       // new project UI
       projectItem.href = "hrefas";
       projectItem.innerHTML = `<a href=${hrefas}>${projectListItem.value}</a>`;
       projectList.append(projectItem);
 
-      // new project items UI
 
-      const newTodoList = document.createElement('ul');
-      newTodoList.innerHTML = `${projectListItem.value} list`;
-      newTodoList.setAttribute('id', hrefas);
-      newTodoList.className = 'todo-list active';
      
       
       projectListItem.value = '';
@@ -38,11 +34,13 @@ const addProject = () => {
     
 
       createRemoveBtn(projectItem);
-      navigate(hrefas, newTodoList);
+      navigate(hrefas);
       // createNewTab(projectItem);
     }, false)
 }
 
+
+// Remove button
 const createRemoveBtn = (el) => {
         const removeBtn = document.createElement('button');
         removeBtn.innerHTML = ('remove');
@@ -55,38 +53,46 @@ const createRemoveBtn = (el) => {
         el.append(removeBtn);
 }
 
+
 // Navigate through projects
-const navigate = (href, newTodoList) => {
-
-  function appendClasses() {
-    const activeNow = document.querySelectorAll('.active');
-  activeNow.forEach.call(activeNow, function(el) {
-    el.classList.remove('active');
-    console.log(activeNow);
-  });
-  }
-
+const navigate = (href) => {
 
 
   const anchor = Array.from(document.querySelectorAll('a'));
   anchor.forEach(i => {
     i.addEventListener('click', (e) => {
-      e.preventDefault()
+    e.preventDefault()
 
-      // Project todo list UI
+    // Find active and hide it
+    hideShow();
 
-      const todoList = document.querySelector('.todo');
-      todoList.append(newTodoList);
-      appendClasses();
+    // new project items UI
+    const newTodoList = document.createElement('ul');
+    newTodoList.innerHTML = `${projectListItem.value} list`;
+    newTodoList.setAttribute('id', href);
+    newTodoList.className = 'todo-list active';
 
-      // Find active and hide it
-      
-      
+    // Project todo list UI
+    const todoList = document.querySelector('.todo');
+    todoList.append(newTodoList);
 
-      newTodoList.classList.add('active');
 
-    })
+    
+
   })
+})
+
+}
+
+const hideShow = () => {
+    const activeNow = document.querySelectorAll('div.todo ul.active');
+  
+    activeNow.forEach.call(activeNow, function(el) {
+      console.log(activeNow);
+      el.classList.remove('active');
+      el.classList.add('hide');
+    });
+  
 }
 
 
