@@ -73,12 +73,19 @@ h1 {
 
 li {
   list-style-type: none;
+  padding: .2rem;
+  margin: .4rem;
+  cursor: pointer;
+}
+
+.delete-buttons {
+  margin-top: 1rem;
 }
 
 
 /* Hide/show project tabs */
 .active {
-  display: block;
+  font-weight: 900;
 }
 
 .hide {
