@@ -5,6 +5,13 @@ const listsContainer = document.querySelector('[data-lists]')
 const newListFrom = document.querySelector('[data-new-list-form]')
 const newListInput = document.querySelector('[data-new-list-input]')
 const deleteListButton = document.querySelector('[data-delete-list-button]')
+const listDisplayContainer = document.querySelector('[data-list-display-container]')
+const listTitleElement = document.querySelector('[data-list-title]')
+const listCountElement = document.querySelector('[data-list-count]')
+const tasksContainer = document.querySelector('[data-tasks]')
+const taskTemplate = document.getElementById('what')
+
+console.log(taskTemplate.content);
 
 const LOCAL_STORAGE_LIST_KEY = 'tasks.lists'
 const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'tasks.selectedListId'
@@ -37,7 +44,11 @@ newListFrom.addEventListener('submit', e => {
 })
 
 function createList(name) {
-  return { id: Date.now().toString(), name: name, tasks: [] }
+  return { id: Date.now().toString(), name: name, tasks: [{
+    id: 'kas',
+    name: 'Sitas',
+    complete: false
+  }] }
 }
 
 function saveAndRender() {
@@ -52,6 +63,41 @@ function save() {
 
 function render() {
   clearElement(listsContainer)
+  renderList()
+  const selectedList = lists.find(list => list.id === selectedListId)
+
+  if (selectedListId == null) {
+    listDisplayContainer.style.display = 'none'
+  } else {
+    listDisplayContainer.style.display = ''
+    listTitleElement.innerHTML = selectedList.name
+    renderTaksCount(selectedList)
+    clearElement(tasksContainer)
+    renderTasks(selectedList)
+  }
+}
+
+
+function renderTasks(selectedList) {
+  selectedList.tasks.forEach(task => {
+    const taskElement = document.importNode(taskTemplate.content, true)
+    const checkbox = taskElement.querySelector('input')
+    checkbox.id = task.id
+    checkbox.checked = task.complete
+    const label = taskElement.querySelector('label')
+    label.htmlFor = task.id
+    label.append(task.name)
+    tasksContainer.appendChild(taskElement)
+  })
+}
+
+function renderTaksCount(selectedList) {
+  const incompleteTasksCount = selectedList.tasks.filter(task => !task.complete).length
+  const taskString = incompleteTasksCount === 1 ? "task" : "tasks"
+  listCountElement.innerText = `${incompleteTasksCount} ${taskString} remaining`
+}
+
+function renderList() {
   lists.forEach(list => {
     const listElement = document.createElement('li')
     listElement.dataset.listId = list.id
@@ -73,3 +119,4 @@ function clearElement(el) {
 
 
 render()
+

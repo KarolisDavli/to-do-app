@@ -46,19 +46,28 @@
         </div>
 
         <div class="grid-item">
-          <div class="grid-inner-item todo">
-            <ul class="todo-list">
-              <li class="default">Research</li>
-              <li class="default">Sketch</li>
-              <li class="default">Retouch</li>
-            </ul>
-  
-            <!-- Submit new todo -->
-            <form id="add-to-todo-list">
-              <input type="text" name="todo-list-item" id="todo-list-item">
-              <button type="submit">Add task</button>
-            </form>
-          </div>
+          <div class="grid-inner-item todo-list" data-list-display-container>
+            <div class="todo-header">
+              <h2 class="list-title" data-list-title>YouTube</h2>
+              <p class="task-count" data-list-count>3 tasks remaining</p>
+            </div>
+      
+            <div class="todo-body">
+              <div class="tasks" data-tasks></div>
+      
+              <div class="new-task-creator">
+                  <form action="" data-new-task-form>
+                      <input 
+                        type="text"
+                        data-new-task-input
+                        class="new task"
+                        placeholder="new task name"
+                        aria-label="new task name"
+                      />
+                      <button class="btn create" aria-label="create new task">+</button>
+                    </form>
+              </div>
+      
         </div>
 
       </div>
@@ -68,5 +77,15 @@
 
 
   <script src="main.js"></script>
+
+  <template id="what">
+    <div class="task">
+      <input type="checkbox" />
+      <label>
+        <span class="custom-checkbox"></span>
+      </label>
+    </div>
+  </template>
+
 </body>
 </html>
