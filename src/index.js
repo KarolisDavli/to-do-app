@@ -11,7 +11,7 @@ const listCountElement = document.querySelector('[data-list-count]')
 const tasksContainer = document.querySelector('[data-tasks]')
 const taskTemplate = document.getElementById('what')
 
-console.log(taskTemplate.content);
+console.log(taskTemplate);
 
 const LOCAL_STORAGE_LIST_KEY = 'tasks.lists'
 const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'tasks.selectedListId'
