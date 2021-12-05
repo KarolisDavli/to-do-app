@@ -9,7 +9,10 @@ const listDisplayContainer = document.querySelector('[data-list-display-containe
 const listTitleElement = document.querySelector('[data-list-title]')
 const listCountElement = document.querySelector('[data-list-count]')
 const tasksContainer = document.querySelector('[data-tasks]')
-const taskTemplate = document.getElementById('what')
+const taskTemplate = document.getElementById('task-template')
+const newTaskForm = document.querySelector('[data-new-task-form]')
+const newTaskInput = document.querySelector('[data-new-task-input]')
+const clearCompleteButton = document.querySelector('[data-clear-complete]')
 
 console.log(taskTemplate);
 
@@ -24,6 +27,22 @@ listsContainer.addEventListener('click', e => {
     selectedListId = e.target.dataset.listId
     saveAndRender();
   }
+})
+
+tasksContainer.addEventListener('click', e => {
+  if (e.target.tagName.toLowerCase() === 'input') {
+    const selectedList = lists.find(list => list.id === selectedListId)
+    const selectedTask = selectedList.tasks.find(task => task.id === e.target.id)
+    selectedTask.complete = e.target.checked
+    save()
+    renderTasksCount(selectedList)
+  }
+})
+
+clearCompleteButton.addEventListener('click', e => {
+  const selectedList = lists.find(list => list.id === selectedListId)
+  selectedList.tasks = selectedList.tasks.filter(task => !task.complete)
+  saveAndRender()
 })
 
 deleteListButton.addEventListener('click', e => {
@@ -43,12 +62,23 @@ newListFrom.addEventListener('submit', e => {
   saveAndRender()
 })
 
+newTaskForm.addEventListener('submit', e => {
+  e.preventDefault()
+  const taskName = newTaskInput.value
+  if (taskName == null || taskName === '') return
+  const task = createTask(taskName)
+  newTaskInput.value = null
+  const selectedList = lists.find(list => list.id === selectedListId)
+  selectedList.tasks.push(task)
+  saveAndRender()
+})
+
+function createTask(name) {
+  return { id: Date.now().toString(), name: name, complete: false }
+}
+
 function createList(name) {
-  return { id: Date.now().toString(), name: name, tasks: [{
-    id: 'kas',
-    name: 'Sitas',
-    complete: false
-  }] }
+  return { id: Date.now().toString(), name: name, tasks: [] }
 }
 
 function saveAndRender() {
@@ -71,7 +101,7 @@ function render() {
   } else {
     listDisplayContainer.style.display = ''
     listTitleElement.innerHTML = selectedList.name
-    renderTaksCount(selectedList)
+    renderTasksCount(selectedList)
     clearElement(tasksContainer)
     renderTasks(selectedList)
   }
@@ -91,7 +121,7 @@ function renderTasks(selectedList) {
   })
 }
 
-function renderTaksCount(selectedList) {
+function renderTasksCount(selectedList) {
   const incompleteTasksCount = selectedList.tasks.filter(task => !task.complete).length
   const taskString = incompleteTasksCount === 1 ? "task" : "tasks"
   listCountElement.innerText = `${incompleteTasksCount} ${taskString} remaining`
